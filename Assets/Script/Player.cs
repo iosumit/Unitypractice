@@ -56,4 +56,9 @@ public class Player
         Debug.Log("name : " + Name);
     }
 
+    public virtual void Attack()
+    {
+        Debug.Log("Player is Attacking with fire");
+    }
+
 }

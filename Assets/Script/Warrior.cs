@@ -10,4 +10,8 @@ public class Warrior : Player
         Power = power;
         Name = name;
     }
+    public override void Attack()
+    {
+        Debug.Log("Warrior is Attacking with Axe");
+    }
 }

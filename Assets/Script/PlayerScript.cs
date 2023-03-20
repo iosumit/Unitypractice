@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
         Warrior warrior = new Warrior(100, 90, "Legends");
         warrior.Health = 20;
         warrior.info();
+        warrior.Attack();
     }
 
     IEnumerator ExecuteSomething()
