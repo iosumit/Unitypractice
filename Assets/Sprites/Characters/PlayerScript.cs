@@ -7,7 +7,14 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     public float speed = 5;
     void Start(){
-        
+        Debug.Log(speed);
+        print(speed);
+        StartCoroutine(ExecuteSomething());
+    }
+
+    IEnumerator ExecuteSomething(){
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Coroutine Executed");
     }
 
     // Update is called once per frame
