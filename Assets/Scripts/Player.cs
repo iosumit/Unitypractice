@@ -9,10 +9,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float jumpForce = 11f;
     private float movementX;
+    private bool isGrounded = true;
+    private bool isJumped = false;
     private Rigidbody2D myBody;
     private SpriteRenderer sr;
     private Animator anim;
     private string WALK_ANIMATION = "Walk";
+    private string GROUND_TAG = "Ground";
 
     private void Awake()
     {
@@ -42,6 +45,12 @@ public class Player : MonoBehaviour
     {
         movementX = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
+
+        // Platform dependent Mobile -> screen touch, PC -> Space
+        if (!isJumped && Input.GetButtonDown("Jump") && isGrounded)
+        {
+            isJumped = true;
+        }
     }
     void AnimatePlayer()
     {
@@ -65,11 +74,18 @@ public class Player : MonoBehaviour
     }
     void PlayerJump()
     {
-
-        // Platform dependent Mobile -> screen touch, PC -> Space
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isJumped && isGrounded)
         {
+            isJumped = false;
+            isGrounded = false;
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(GROUND_TAG))
+            isGrounded = true;
     }
 }
