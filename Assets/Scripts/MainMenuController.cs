@@ -9,6 +9,9 @@ public class MainMenuController : MonoBehaviour
     {
         int index = int.Parse(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
         GameManager.instance.CharIndex = index;
-        SceneManager.LoadScene("Gameplay");
+        if (index == 2)
+            SceneManager.LoadScene("FlappyBird");
+        else
+            SceneManager.LoadScene("Gameplay");
     }
 }
